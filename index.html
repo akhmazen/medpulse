@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Учебный сайт о медицине и здоровье">
+  <title>МедПульс — просто о медицине</title>
+  <style>
+    :root {
+      --navy: #102a43;
+      --teal: #087f8c;
+      --paper: #f5fafb;
+      --ink: #233746;
+      --muted: #637887;
+      --line: #dce9ed;
+      --shadow: 0 16px 45px rgba(16,42,67,.09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    .container { width: min(1120px, calc(100% - 32px)); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex; align-items: center;
+      justify-content: space-between; min-height: 72px; gap: 20px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 850; color: var(--navy); font-size: 1.3rem;
+    }
+    .brand-mark {
+      display: grid; place-items: center; width: 40px; height: 40px;
+      color: white; background: var(--teal); border-radius: 13px;
+      font-size: 1.5rem;
+    }
+    .nav-links { display: flex; gap: 24px; color: #496170; font-weight: 650; }
+    .nav-links a:hover { color: var(--teal); }
+    .menu-btn {
+      display: none; background: white; border: 1px solid var(--line);
+      border-radius: 12px; padding: 8px 12px;
+    }
+    .hero { padding: 70px 0 60px; overflow: hidden; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.05fr .95fr;
+      align-items: center; gap: 40px;
+    }
+    .eyebrow {
+      display: inline-block; color: var(--teal); background: #e2f6f3;
+      border: 1px solid #c8ece7; border-radius: 100px;
+      padding: 7px 13px; font-size: .85rem; font-weight: 800;
+    }
+    h1 {
+      color: var(--navy); font-size: clamp(2.5rem,5vw,4.4rem);
+      line-height: 1.05; letter-spacing: -2px; margin: 20px 0;
+    }
+    h1 span { color: var(--teal); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 550px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center;
+      border-radius: 13px; padding: 13px 19px; font-weight: 800;
+      border: 1px solid transparent; transition: .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--teal); color: white; }
+    .btn-secondary { background: white; color: var(--navy); border-color: var(--line); }
+    .hero-visual {
+      position: relative; min-height: 370px;
+      display: grid; place-items: center;
+    }
+    .orb {
+      width: min(350px,90%); aspect-ratio: 1; border-radius: 50%;
+      background: linear-gradient(145deg,#c5f2e8,#e6f8fb,#c9e8f5);
+      display: grid; place-items: center;
+    }
+    .medical-card {
+      background: white; border-radius: 25px; width: 72%;
+      padding: 25px; box-shadow: var(--shadow); text-align: center;
+    }
+    .medical-symbol {
+      width: 105px; height: 105px; border-radius: 30px;
+      display: grid; place-items: center; margin: 0 auto 15px;
+      background: linear-gradient(145deg,#0b8994,#0a687d);
+      color: white; font-size: 4.5rem;
+    }
+    .medical-card strong { display: block; font-size: 1.2rem; color: var(--navy); }
+    .medical-card small { color: var(--muted); }
+    .float {
+      position: absolute; background: white; border: 1px solid var(--line);
+      border-radius: 16px; padding: 12px 15px; box-shadow: var(--shadow);
+      font-weight: 750; color: var(--navy);
+    }
+    .float span { display: block; font-size: .75rem; color: var(--muted); font-weight: 500; }
+    .float-one { top: 30px; right: 0; }
+    .float-two { bottom: 25px; left: 0; }
+    section { padding: 70px 0; }
+    .section-head { text-align: center; max-width: 680px; margin: 0 auto 35px; }
+    .kicker {
+      color: var(--teal); font-size: .8rem; font-weight: 850;
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+    h2 {
+      color: var(--navy); font-size: clamp(1.9rem,3.4vw,2.7rem);
+      line-height: 1.15; margin: 10px 0 12px;
+    }
+    .section-head p { color: var(--muted); }
+    .topics { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .topic-card {
+      background: white; border: 1px solid var(--line); border-radius: 22px;
+      padding: 25px; box-shadow: 0 7px 22px rgba(16,42,67,.035);
+      transition: transform .2s;
+    }
+    .topic-card:hover { transform: translateY(-5px); }
+    .topic-icon {
+      display: grid; place-items: center; width: 56px; height: 56px;
+      border-radius: 17px; background: #e5f7f5; font-size: 1.8rem;
+      margin-bottom: 17px;
+    }
+    .topic-card h3 { color: var(--navy); margin: 0 0 8px; }
+    .topic-card p { color: var(--muted); font-size: .95rem; }
+    .text-link { color: var(--teal); font-weight: 800; }
+    .facts-section { background: #eaf6f7; }
+    .facts-grid {
+      display: grid; grid-template-columns: .8fr 1.2fr;
+      gap: 40px; align-items: center;
+    }
+    .facts-intro p { color: var(--muted); }
+    .fact-box {
+      background: white; border: 1px solid #d8e9eb;
+      border-radius: 24px; padding: 27px; box-shadow: var(--shadow);
+    }
+    .fact-label {
+      color: var(--teal); font-size: .8rem; font-weight: 850;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    #factText { color: var(--navy); font-size: 1.2rem; font-weight: 700; min-height: 75px; }
+    .fact-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .fact-count { color: var(--muted); font-size: .85rem; }
+    .quiz {
+      background: var(--navy); color: white; border-radius: 28px;
+      padding: 35px; display: grid; grid-template-columns: 1fr 1fr;
+      gap: 30px; align-items: center;
+    }
+    .quiz h2 { color: white; }
+    .quiz p { color: #c7d9e3; }
+    .quiz-panel { background: white; color: var(--ink); border-radius: 20px; padding: 24px; }
+    .quiz-panel h3 { color: var(--navy); margin-top: 0; }
+    .answers { display: grid; gap: 9px; }
+    .answer {
+      text-align: left; border: 1px solid var(--line); border-radius: 12px;
+      padding: 11px 13px; background: white; color: var(--ink);
+    }
+    .answer:hover { border-color: var(--teal); background: #f2fbfa; }
+    .answer.correct { border-color: #249b70; background: #e8f8f0; }
+    .answer.wrong { border-color: #d66c6c; background: #fff0f0; }
+    #quizFeedback { font-size: .9rem; min-height: 25px; }
+    .disclaimer { margin-top: 25px; color: #6b8791; font-size: .83rem; text-align: center; }
+    footer { background: #0b2033; color: #c6d6df; padding: 30px 0; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    footer .brand { color: white; }
+    footer p { font-size: .86rem; color: #9eb4c1; }
+    .to-top {
+      position: fixed; right: 20px; bottom: 20px; width: 45px; height: 45px;
+      border: 0; border-radius: 15px; background: var(--teal);
+      color: white; font-size: 1.2rem; display: none;
+    }
+    .to-top.show { display: block; }
+    @media(max-width:850px) {
+      .hero-grid,.facts-grid,.quiz { grid-template-columns: 1fr; }
+      .topics { grid-template-columns: repeat(2,1fr); }
+      .hero-visual { min-height: 340px; }
+    }
+    @media(max-width:620px) {
+      .nav { min-height: 67px; }
+      .menu-btn { display: block; }
+      .nav-links {
+        display: none; position: absolute; left: 14px; right: 14px; top: 68px;
+        padding: 17px; border: 1px solid var(--line); border-radius: 17px;
+        background: white; flex-direction: column; gap: 14px;
+      }
+      .nav-links.open { display: flex; }
+      h1 { letter-spacing: -1.5px; }
+      .hero { padding: 42px 0 50px; }
+      .topics { grid-template-columns: 1fr; }
+      .quiz { padding: 22px; }
+      .fact-box { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home"><span class="brand-mark">✚</span>МедПульс</a>
+      <button class="menu-btn" id="menuBtn">☰ Меню</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#topics">Разделы</a>
+        <a href="#facts">Факты</a>
+        <a href="#quiz">Мини-тест</a>
+        <a href="#about">О проекте</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">🩺 Знания, которые помогают</span>
+          <h1>Медицина —<br>понятно о <span>важном.</span></h1>
+          <p>Открой удивительный мир человеческого организма. Простые объяснения, полезные знания и интересные факты о здоровье — в одном месте.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#topics">Исследовать темы →</a>
+            <a class="btn btn-secondary" href="#quiz">Проверить знания</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="orb">
+            <div class="medical-card">
+              <div class="medical-symbol">✚</div>
+              <strong>Здоровье начинается со знаний</strong>
+              <small>Учись. Исследуй. Заботься.</small>
+            </div>
+          </div>
+          <div class="float float-one">🫀 Анатомия<span>Как устроен организм</span></div>
+          <div class="float float-two">🧬 Наука<span>Открытия каждый день</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="topics">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Изучай и открывай</span>
+          <h2>Мир медицины рядом</h2>
+          <p>Выбери направление и познакомься с основами науки о человеческом здоровье.</p>
+        </div>
+        <div class="topics">
+          <article class="topic-card">
+            <div class="topic-icon">🫀</div>
+            <h3>Анатомия человека</h3>
+            <p>Узнай, из каких систем состоит организм и как взаимодействуют его органы.</p>
+            <a class="text-link" href="https://ru.wikipedia.org/wiki/Анатомия_человека" target="_blank" rel="noopener">Изучить тему ↗</a>
+          </article>
+          <article class="topic-card">
+            <div class="topic-icon">🦠</div>
+            <h3>Микробиология</h3>
+            <p>Познакомься с бактериями, вирусами и ролью микроорганизмов.</p>
+            <a class="text-link" href="https://ru.wikipedia.org/wiki/Микробиология" target="_blank" rel="noopener">Изучить тему ↗</a>
+          </article>
+          <article class="topic-card">
+            <div class="topic-icon">🧠</div>
+            <h3>Нервная система</h3>
+            <p>Разберись, как мозг получает информацию и управляет работой тела.</p>
+            <a class="text-link" href="https://ru.wikipedia.org/wiki/Нервная_система" target="_blank" rel="noopener">Изучить тему ↗</a>
+          </article>
+          <article class="topic-card">
+            <div class="topic-icon">🩸</div>
+            <h3>Кровь и сердце</h3>
+            <p>Узнай, как кровь переносит кислород и почему сердцу важен ритм.</p>
+            <a class="text-link" href="https://ru.wikipedia.org/wiki/Кровь" target="_blank" rel="noopener">Изучить тему ↗</a>
+          </article>
+          <article class="topic-card">
+            <div class="topic-icon">🌿</div>
+            <h3>Здоровые привычки</h3>
+            <p>Сон, движение, питание и гигиена — важные части заботы о себе.</p>
+            <a class="text-link" href="https://www.who.int/ru" target="_blank" rel="noopener">ВОЗ: о здоровье ↗</a>
+          </article>
+          <article class="topic-card">
+            <div class="topic-icon">🧑‍⚕️</div>
+            <h3>Профессия врача</h3>
+            <p>Познакомься с направлениями медицины и ролью медицинских специалистов.</p>
+            <a class="text-link" href="https://ru.wikipedia.org/wiki/Медицина" target="_blank" rel="noopener">Узнать больше ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="facts-section" id="facts">
+      <div class="container facts-grid">
+        <div class="facts-intro">
+          <span class="kicker">Знаешь ли ты?</span>
+          <h2>Один факт — новое открытие</h2>
+          <p>Нажимай на кнопку и узнавай интересные сведения о человеческом организме.</p>
+        </div>
+        <div class="fact-box">
+          <div class="fact-label">Медицинский факт</div>
+          <p id="factText">Сердце человека работает непрерывно, перекачивая кровь по кровеносным сосудам.</p>
+          <div class="fact-controls">
+            <span class="fact-count" id="factCount">Факт 1 из 5</span>
+            <button class="btn btn-primary" id="nextFact">Следующий факт →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <div class="container">
+        <div class="quiz">
+          <div>
+            <span class="kicker" style="color:#8ee0d5">Проверь себя</span>
+            <h2>Небольшой тест по биологии</h2>
+            <p>Ответь на вопрос и узнай, насколько хорошо ты знаешь основы человеческого организма.</p>
+          </div>
+          <div class="quiz-panel">
+            <h3>Какой орган перекачивает кровь по организму?</h3>
+            <div class="answers" id="answers">
+              <button class="answer" data-correct="false">Лёгкие</button>
+              <button class="answer" data-correct="true">Сердце</button>
+              <button class="answer" data-correct="false">Желудок</button>
+            </div>
+            <p id="quizFeedback" aria-live="polite">Выбери один ответ.</p>
+            <button class="text-link" id="resetQuiz" style="border:0;background:transparent;padding:0">Пройти ещё раз ↻</button>
+          </div>
+        </div>
+        <p class="disclaimer">Материал создан для учебного проекта. Он не заменяет консультацию медицинского специалиста.</p>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container section-head">
+        <span class="kicker">О проекте</span>
+        <h2>МедПульс — учиться интересно</h2>
+        <p>Этот учебный сайт знакомит посетителей с медициной в доступной форме. Его цель — пробуждать интерес к науке, помогать повторять основы биологии и напоминать о важности ответственного отношения к здоровью.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>
+        <a class="brand" href="#home"><span class="brand-mark">✚</span>МедПульс</a>
+        <p>Учебный проект о медицине и здоровье.</p>
+      </div>
+      <p>© <span id="year"></span> МедПульс · Создано для обучения</p>
+    </div>
+  </footer>
+  <button class="to-top" id="toTop" aria-label="Наверх">↑</button>
+
+  <script>
+    const facts = [
+      "Сердце человека работает непрерывно, перекачивая кровь по кровеносным сосудам.",
+      "Кожа — самый большой орган человеческого тела и важный защитный барьер.",
+      "Красные кровяные клетки переносят кислород благодаря белку гемоглобину.",
+      "Мозг получает информацию от органов чувств и координирует многие функции организма.",
+      "Кости не являются неподвижными: костная ткань постоянно обновляется."
+    ];
+    let factIndex = 0;
+    const factText = document.getElementById("factText");
+    const factCount = document.getElementById("factCount");
+
+    document.getElementById("nextFact").addEventListener("click", () => {
+      factIndex = (factIndex + 1) % facts.length;
+      factText.textContent = facts[factIndex];
+      factCount.textContent = `Факт ${factIndex + 1} из ${facts.length}`;
+    });
+
+    const answers = document.querySelectorAll(".answer");
+    const feedback = document.getElementById("quizFeedback");
+
+    answers.forEach(answer => {
+      answer.addEventListener("click", () => {
+        answers.forEach(item => {
+          item.disabled = true;
+          if (item.dataset.correct === "true") item.classList.add("correct");
+        });
+        if (answer.dataset.correct === "true") {
+          feedback.textContent = "Верно! Сердце помогает крови двигаться по сосудам.";
+          feedback.style.color = "#16845d";
+        } else {
+          answer.classList.add("wrong");
+          feedback.textContent = "Не совсем. Правильный ответ — сердце.";
+          feedback.style.color = "#b34848";
+        }
+      });
+    });
+
+    document.getElementById("resetQuiz").addEventListener("click", () => {
+      answers.forEach(item => {
+        item.disabled = false;
+        item.classList.remove("correct", "wrong");
+      });
+      feedback.textContent = "Выбери один ответ.";
+      feedback.style.color = "";
+    });
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    const toTop = document.getElementById("toTop");
+    window.addEventListener("scroll", () => {
+      toTop.classList.toggle("show", window.scrollY > 400);
+    });
+    toTop.addEventListener("click", () => window.scrollTo({top: 0, behavior: "smooth"}));
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
